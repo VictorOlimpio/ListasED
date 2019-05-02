@@ -46,21 +46,29 @@ void libera(Lista *l){
 }
 
 Lista* rto(Lista *l, int elem){
-    Lista *anterior = NULL, *p = l, *atual = p;
+    Lista *anterior = NULL, *atual = l, *q;
     while(atual){
         if(atual->info == elem){
-            anterior->prox = atual->prox;
+            if(!anterior){
+                l = l->prox;
+            }else{
+                anterior->prox = atual->prox;
+            }
+            q = atual;
+            atual = atual->prox;
+            free(q);
         }else{
             anterior = atual;
+            atual = atual->prox;
         }
-        atual = atual->prox;
+        
     }
-    return p;
+    return l;
 }
 
 int main(void){
     Lista *l = inicializa();
-    l = insere_fim(1, l);
+    l = insere_fim(2, l);
     l = insere_fim(2, l);
     l = insere_fim(3, l);
     l = insere_fim(2, l);
