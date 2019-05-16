@@ -39,20 +39,21 @@ void imprime(TSLE *l){
     }
     printf("\n");
 }
-
+void libera(TSLE *l);
 void inverte(TSLE *l){
     TSLE *p = l, *q;
     while(p){
         q = insere_inicio(p->info, q);
         p = p->prox;
     }
+    libera(l);
     *l = *q;
 }
 void libera(TSLE *l){
     TSLE *p = l, *q;
     while(p){
         q = p;
-        p = l->prox;
+        p = p->prox;
         free(q);
     }
 }

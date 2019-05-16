@@ -53,6 +53,7 @@ LISTA* desloca(LISTA* l, int n){
     int info;
     if(n%2 == 0){
         info = p->info;
+        free(p);
         p = insere_fim(info, p->prox);
         return p;
     }else{
@@ -61,10 +62,13 @@ LISTA* desloca(LISTA* l, int n){
             q = q->prox;
         }
         info = q->prox->info;
+        free(q->prox->prox);
         q->prox = NULL;
         p = insere_inicio(info, p);
         return p;
     }
+    free(q);
+    free(p);
     return NULL;
 }
 
